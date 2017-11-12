@@ -16,7 +16,7 @@ class SearchBooks extends Component {
 
   render() {
     return(
-      <div className="search-books">
+      <div className="search-books">”
         <div className="search-books-bar">
           <a className="close-search" onClick={() => this.props.onPageChange()}>Close</a>
           <div className="search-books-input-wrapper">
