@@ -17,16 +17,19 @@ class ListBooks extends Component {
               shelfName='Currently Reading'
               books={this.props.books}
               bookShelfFilter='currentlyReading'
+              onMoveBookShelf={this.props.onMoveBookShelf}
             />
             <BookShelf
               shelfName='Want to Read'
               books={this.props.books}
               bookShelfFilter='wantToRead'
+              onMoveBookShelf={this.props.onMoveBookShelf}
             />
             <BookShelf
               shelfName='Read'
               books={this.props.books}
               bookShelfFilter='read'
+              onMoveBookShelf={this.props.onMoveBookShelf}
             />
           </div>
         </div>

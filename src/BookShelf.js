@@ -11,9 +11,12 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {this.props.books.filter((book) => book.shelf === this.props.bookShelfFilter).map((book) => (
-              <SingleBook
-                book={book}
-              />
+              <li key={book.id}>
+                <SingleBook
+                  book={book}
+                  onMoveBookShelf={this.props.onMoveBookShelf}
+                />
+              </li>
             ))}
           </ol>
         </div>

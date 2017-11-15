@@ -5,6 +5,8 @@ import ListBooks from './ListBooks';
 import './App.css';
 
 class BooksApp extends Component {
+
+
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -13,7 +15,12 @@ class BooksApp extends Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: false,
-    books: []
+    books: [],
+    shelves: [
+      {'currentlyReading': 'Currently Reading'},
+      {'wantToRead': 'Want to Read'},
+      {'read': 'Read'}
+    ]
   }
 
   // TODO: Delete this function when you add the router
@@ -32,6 +39,14 @@ class BooksApp extends Component {
     )
   }
 
+  changeShelf = (book, newShelf) => {
+    const newBookList = this.state.books.filter((b) => b.id !== book.id)
+    const updatedBook = {...book, shelf: newShelf}
+    newBookList.push(updatedBook)
+    this.setState({books: newBookList})
+    BooksAPI.update(book, newShelf)
+  }
+
   render() {
     return (
       <div className="app">
@@ -42,10 +57,10 @@ class BooksApp extends Component {
           />
         ) : (
           <div>
-            {JSON.stringify(this.state.books)}
             <ListBooks
               onPageChange={this.changePage}
               books={this.state.books}
+              onMoveBookShelf={this.changeShelf}
             />
           </div>
         )}
