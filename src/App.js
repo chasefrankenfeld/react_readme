@@ -9,18 +9,16 @@ class BooksApp extends Component {
 
   state = {
     /**
-     * TODO: Instead of using this state variable to keep track of which page
-     * we're on, use the URL in the browser's address bar. This will ensure that
-     * users can use the browser's back and forward buttons to navigate between
-     * pages, as well as provide a good URL they can bookmark and share.
+     * TODO: Use React-Router instead of showSearchPage
      */
     showSearchPage: false,
     books: [],
-    shelves: [
-      {'currentlyReading': 'Currently Reading'},
-      {'wantToRead': 'Want to Read'},
-      {'read': 'Read'}
-    ]
+    /* Insert any shelves you desire in the format 'bookShelfFilter': 'Book Shelf Name' */
+    shelves: {
+      'currentlyReading': 'Currently Reading',
+      'wantToRead': 'Want to Read',
+      'read': 'Read'
+    }
   }
 
   // TODO: Delete this function when you add the router
@@ -40,6 +38,7 @@ class BooksApp extends Component {
   }
 
   changeShelf = (book, newShelf) => {
+    // Ensure immutability in changing the state of the books
     const newBookList = this.state.books.filter((b) => b.id !== book.id)
     const updatedBook = {...book, shelf: newShelf}
     newBookList.push(updatedBook)
@@ -61,6 +60,7 @@ class BooksApp extends Component {
               onPageChange={this.changePage}
               books={this.state.books}
               onMoveBookShelf={this.changeShelf}
+              shelves={this.state.shelves}
             />
           </div>
         )}
