@@ -4,8 +4,8 @@ import SearchBooks from './SearchBooks';
 import ListBooks from './ListBooks';
 import './App.css';
 
-class BooksApp extends Component {
 
+class BooksApp extends Component {
 
   state = {
     /**
@@ -29,7 +29,7 @@ class BooksApp extends Component {
         this.setState({ showSearchPage: true })
       )
     }
-  };
+  }
 
   componentDidMount() {
     BooksAPI.getAll().then((books) =>
