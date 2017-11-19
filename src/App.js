@@ -42,7 +42,7 @@ class BooksApp extends Component {
     const newBookList = this.state.books.filter((b) => b.id !== book.id)
     const updatedBook = {...book, shelf: newShelf}
     newBookList.push(updatedBook)
-    this.setState({books: newBookList})
+    this.setState({ books: newBookList })
     BooksAPI.update(book, newShelf)
   }
 
@@ -53,6 +53,9 @@ class BooksApp extends Component {
           // TODO: Change this.changePage for changing the page state when adding the router
           <SearchBooks
             onPageChange={this.changePage}
+            books={this.state.books}
+            shelves={this.state.shelves}
+            onMoveBookShelf={this.changeShelf}
           />
         ) : (
           <div>

@@ -1,45 +1,59 @@
 import React, { Component } from 'react';
+import SingleBook from './SingleBook';
 import * as BooksAPI from './BooksAPI';
 
 
 class SearchBooks extends Component {
 
   state = {
-    query: "",
-    books: {}
+    query: '',
+    searchBooks: []
   }
 
   updateQuery = (query) => {
-    this.setState({ query: query.trim(), books: BooksAPI.search(query.trim(), 20)})
+    this.setState({ query: query.toLowerCase() })
+    BooksAPI.search(this.state.query, 20).then((books) => {
+      this.setState({ searchBooks: books })
+    })
   }
 
+  clearQuery = () => {
+    this.setState({ query: '' })
+    this.setState({ searchBooks: [] })
+  }
+
+  handleChange = (event) => {
+    this.updateQuery(event.target.value)
+  };
 
   render() {
+
     return(
       <div className="search-books">”
         <div className="search-books-bar">
           <a className="close-search" onClick={() => this.props.onPageChange()}>Close</a>
           <div className="search-books-input-wrapper">
-            {/*
-              NOTES: The search from BooksAPI is limited to a particular set of search terms.
-              You can find these search terms here:
-              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-              you don't find a specific author or title. Every search is limited by search terms.
-            */}
             <input
               type="text"
               placeholder="Search by title or author"
               value={this.state.query}
-              onChange={(event) => this.updateQuery(event.target.value)}
+              onChange={this.handleChange}
             />
-
           </div>
+          <a className="clear-search" onClick={this.clearQuery}>Close</a>
         </div>
+
         <div className="search-books-results">
-          {JSON.stringify(this.state)}
           <ol className="books-grid">
+            {this.state.searchBooks && this.state.searchBooks.map((book) => (
+              <li key={book.id}>
+                <SingleBook
+                  book={book}
+                  shelves={this.props.shelves}
+                  onMoveBookShelf={this.props.onMoveBookShelf}
+                />
+              </li>
+            ))}
           </ol>
         </div>
       </div>

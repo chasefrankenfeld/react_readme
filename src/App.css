@@ -105,6 +105,23 @@ body, .app {
   padding: 80px 10px 20px;
 }
 
+.clear-search {
+  padding-left: 20px;
+  padding-right: 40px;
+  align-self: center;
+  width: 32px;
+  height: 32px;
+  background-color: solid;
+  background-image: url('./icons/cancel.svg');
+  background-size: 100% 100%;
+  border: 0;
+  color: black;
+  font-size: 0;
+  vertical-align: middle;
+  cursor: pointer;
+  outline: none;
+}
+
 /* books grid */
 
 .books-grid {
