@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import SingleBook from './SingleBook';
 import * as BooksAPI from './BooksAPI';
 
@@ -31,7 +32,9 @@ class SearchBooks extends Component {
     return(
       <div className="search-books">”
         <div className="search-books-bar">
-          <a className="close-search" onClick={() => this.props.onPageChange()}>Close</a>
+          <Link className="close-search"
+            to='/'
+          />
           <div className="search-books-input-wrapper">
             <input
               type="text"

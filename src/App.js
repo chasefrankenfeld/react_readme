@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import * as BooksAPI from './BooksAPI'
+import { Route } from 'react-router-dom';
+import * as BooksAPI from './BooksAPI';
 import SearchBooks from './SearchBooks';
 import ListBooks from './ListBooks';
 import './App.css';
@@ -8,26 +9,12 @@ import './App.css';
 class BooksApp extends Component {
 
   state = {
-    /**
-     * TODO: Use React-Router instead of showSearchPage
-     */
-    showSearchPage: false,
     books: [],
     /* Insert any shelves you desire in the format 'bookShelfFilter': 'Book Shelf Name' */
     shelves: {
       'currentlyReading': 'Currently Reading',
       'wantToRead': 'Want to Read',
       'read': 'Read'
-    }
-  }
-
-  // TODO: Delete this function when you add the router
-  changePage = () => {
-    {this.state.showSearchPage ? (
-        this.setState({ showSearchPage: false })
-      ) : (
-        this.setState({ showSearchPage: true })
-      )
     }
   }
 
@@ -49,24 +36,25 @@ class BooksApp extends Component {
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          // TODO: Change this.changePage for changing the page state when adding the router
-          <SearchBooks
-            onPageChange={this.changePage}
-            books={this.state.books}
-            shelves={this.state.shelves}
-            onMoveBookShelf={this.changeShelf}
-          />
-        ) : (
+
+        <Route exact path='/' render={() =>
           <div>
             <ListBooks
-              onPageChange={this.changePage}
               books={this.state.books}
               onMoveBookShelf={this.changeShelf}
               shelves={this.state.shelves}
             />
           </div>
-        )}
+        } />
+
+        <Route exact path='/search' render={() =>
+          <SearchBooks
+            books={this.state.books}
+            shelves={this.state.shelves}
+            onMoveBookShelf={this.changeShelf}
+          />
+        } />
+
       </div>
     )
   }
