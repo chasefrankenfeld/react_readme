@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import BookShelfChanger from './BookShelfChanger';
 
 
 class SingleBook extends Component {
+
+  static propTypes = {
+    books: PropTypes.array.isRequired,
+    shelves: PropTypes.object.isRequired,
+    onMoveBookShelf: PropTypes.func.isRequired
+  }
 
   state = {
     shelf: '',
