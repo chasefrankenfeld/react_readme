@@ -6,7 +6,7 @@ import BookShelfChanger from './BookShelfChanger';
 class SingleBook extends Component {
 
   static propTypes = {
-    books: PropTypes.array.isRequired,
+    books: PropTypes.array,
     shelves: PropTypes.object.isRequired,
     onMoveBookShelf: PropTypes.func.isRequired
   }
