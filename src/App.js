@@ -24,13 +24,18 @@ class BooksApp extends Component {
     )
   }
 
+  // Placed the state update inside the API call promise resolutio to ensure state only changes after API update
   changeShelf = (book, newShelf) => {
-    // Ensure immutability in changing the state of the books
-    const newBookList = this.state.books.filter((b) => b.id !== book.id)
-    const updatedBook = {...book, shelf: newShelf}
-    newBookList.push(updatedBook)
-    this.setState({ books: newBookList })
-    BooksAPI.update(book, newShelf)
+    BooksAPI.update(book, newShelf).then(() => {
+      // Ensure immutability in changing the state of the books
+      const newBookList = this.state.books.filter((b) => b.id !== book.id)
+      const updatedBook = {...book, shelf: newShelf}
+      newBookList.push(updatedBook)
+      this.setState({ books: newBookList })
+    }, () => {
+      // Logging in the console should the
+      alert(`${book.title} did not chang shelf to ${newShelf}!`)
+    })
   }
 
   render() {
