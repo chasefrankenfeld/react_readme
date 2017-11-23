@@ -33,7 +33,7 @@ class BooksApp extends Component {
       newBookList.push(updatedBook)
       this.setState({ books: newBookList })
     }, () => {
-      // Logging in the console should the
+      // Logging in the console should an error occur
       alert(`${book.title} did not chang shelf to ${newShelf}!`)
     })
   }
