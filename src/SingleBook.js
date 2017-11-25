@@ -36,6 +36,10 @@ class SingleBook extends Component {
            : BookCoverReplacement
   }
 
+  moreAuthors = (authorsList) => {
+    return Array.isArray(authorsList) ? authorsList.join(', ') : authorsList
+  }
+
   render() {
 
     return(
@@ -51,7 +55,7 @@ class SingleBook extends Component {
           />
         </div>
         <div className="book-title">{this.props.book.title}</div>
-        <div className="book-authors">{this.props.book.authors.join(', ')}</div>
+        <div className="book-authors">{this.moreAuthors(this.props.book.authors)}</div>
       </div>
     )
   }

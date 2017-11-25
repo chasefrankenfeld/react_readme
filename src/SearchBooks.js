@@ -20,18 +20,17 @@ class SearchBooks extends Component {
 
   updateQuery = (query) => {
     this.setState({ query: query.toLowerCase() })
-    BooksAPI.search(this.state.query, 20).then((books) => {
+    BooksAPI.search(query, 20).then((books) => {
       let booksObject = {books}
-      let listBooks = booksObject.books
-      const newListBooks = listBooks.map((b) => {
-        let newBook = this.props.books.find((bk1) => bk1.id === b.id)
-        if (newBook) {
-          return newBook
-        } else {
-          return b
-        }
-      })
-      this.setState({ searchBooks: newListBooks })
+      try {
+        const newListBooks = booksObject.books.map((b) => {
+          let newBook = this.props.books.find((bk1) => bk1.id === b.id)
+          return newBook ? newBook : b
+        })
+        this.setState({ searchBooks: newListBooks })
+      } catch(e) {
+        this.setState({ searchBooks: [] })
+      }
     })
   }
 
